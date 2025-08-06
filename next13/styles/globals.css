@@ -1,21 +1,1000 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html {
-  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  font-size: 14px;
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-gray-50;
+  }
 }
 
-.navbar {
-  display: flex;
-  background-color: #ccc;
-  margin-bottom: 1em;
+@layer components {
+  /* 네비게이션 바 - 더 모던한 글래스모피즘 */
+  .navbar {
+    @apply flex bg-primary-gradient shadow-custom-md mb-8 backdrop-blur-sm;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.9) 0%, rgba(3, 105, 161, 0.9) 50%, rgba(8, 47, 73, 0.9) 100%);
+  }
+  
+  .navbar > * {
+    @apply px-6 py-4 text-white font-medium transition-all duration-300 no-underline relative overflow-hidden;
+  }
+  
+  .navbar > *::before {
+    @apply content-[''] absolute inset-0 bg-glass scale-x-0 origin-left transition-transform duration-300;
+  }
+  
+  .navbar > *:hover::before {
+    @apply scale-x-100;
+  }
+  
+  .navbar > *:hover {
+    @apply -translate-y-1 text-primary-100;
+  }
+  
+  /* 캘린더 컨테이너 - 더 넓은 여백과 그라디언트 배경 */
+  .calendar-container {
+    @apply w-full max-w-7xl mx-auto px-8 relative;
+  }
+  
+  .calendar-container::before {
+    @apply content-[''] absolute inset-0 bg-surface-gradient rounded-2xl opacity-30 -z-10;
+    filter: blur(1px);
+  }
+  
+  /* FullCalendar 기본 스타일 - 글래스모피즘과 네오모피즘 */
+  .fc {
+    @apply bg-white/95 backdrop-blur-md rounded-2xl overflow-hidden font-sans animate-fade-in-slow relative;
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .fc::before {
+    @apply content-[''] absolute inset-0 bg-glass rounded-2xl pointer-events-none;
+  }
+  
+  /* 헤더 툴바는 숨김 처리되었으므로 제거 */
+  
+  /* 이벤트 스타일 - 네오모피즘과 글래스 효과 */
+  .fc-event {
+    @apply border-none rounded-xl font-medium text-sm cursor-pointer overflow-hidden animate-fade-in relative;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 100%);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      0 2px 6px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fc-event::before {
+    @apply content-[''] absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  }
+  
+  .fc-event:hover {
+    @apply -translate-y-1 scale-105;
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  
+  .fc-event:hover::before {
+    @apply opacity-100;
+  }
+  
+  .fc-event-title {
+    @apply font-semibold relative z-10;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .fc-event-time {
+    @apply text-white/90 font-medium relative z-10;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* 이벤트 색상 그라디언트 - 더 세련되고 생동감 있는 색상 */
+  .fc-event[style*="background-color: green"] {
+    background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%) !important;
+  }
+  
+  .fc-event[style*="background-color: orange"] {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #c2410c 100%) !important;
+  }
+  
+  .fc-event[style*="background-color: red"] {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%) !important;
+  }
+  
+  .fc-event[style*="background-color: blue"] {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%) !important;
+  }
+  
+  .fc-event[style*="background-color: purple"] {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%) !important;
+  }
+  
+  .fc-event[style*="background-color: pink"] {
+    background: linear-gradient(135deg, #ec4899 0%, #db2777 50%, #be185d 100%) !important;
+  }
+  
+  .fc-event[style*="background-color: brown"] {
+    background: linear-gradient(135deg, #a3a3a3 0%, #737373 50%, #525252 100%) !important;
+  }
+  
+  .fc-event[style*="background-color: gray"] {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 50%, #374151 100%) !important;
+  }
+  
+  .fc-event[style*="background-color: black"] {
+    background: linear-gradient(135deg, #4b5563 0%, #374151 50%, #1f2937 100%) !important;
+  }
+  
+  /* 기본 이벤트 색상 - 새로운 프라이머리 그라디언트 */
+  .fc-event:not([style*="background-color"]) {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 50%, #082f49 100%) !important;
+  }
+  
+  /* 리소스 타임그리드 - 전체 배경과 레이아웃 */
+  .fc-resource-timegrid-view {
+    @apply bg-transparent;
+  }
+  
+  .fc-timegrid-header {
+    @apply bg-transparent border-b-0;
+  }
+  
+  .fc-timegrid-header th {
+    @apply border-surface-200/50 text-surface-600 font-medium text-sm tracking-wide py-6 px-4;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.6) 100%);
+    backdrop-filter: blur(10px);
+  }
+  
+  /* 리소스 컬럼 헤더 - 글래스모피즘과 아이콘 효과 */
+  .fc-col-header-cell {
+    @apply border-surface-200/30 font-bold text-primary-800 relative overflow-hidden py-6 px-4;
+    background: linear-gradient(135deg, rgba(240, 249, 255, 0.9) 0%, rgba(186, 230, 253, 0.7) 50%, rgba(125, 211, 252, 0.5) 100%);
+    backdrop-filter: blur(15px);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fc-col-header-cell::before {
+    @apply content-[''] absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(3, 105, 161, 0.05) 100%);
+  }
+  
+  .fc-col-header-cell:hover {
+    @apply -translate-y-0.5;
+    background: linear-gradient(135deg, rgba(224, 242, 254, 0.9) 0%, rgba(186, 230, 253, 0.8) 50%, rgba(125, 211, 252, 0.6) 100%);
+    box-shadow: 
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  
+  .fc-col-header-cell:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* 헤더 텍스트 스타일 개선 */
+  .fc-col-header-cell .fc-col-header-cell-cushion {
+    @apply relative z-10 font-bold text-lg tracking-wide;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+  }
+  
+  /* 리소스 컬럼 (vertical layout) - 더 넓은 컬럼 */
+  .fc-timegrid-col {
+    @apply border-gray-200/30 transition-all duration-300 relative;
+    min-width: 200px !important; /* 컬럼을 더 넓게 */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(248, 250, 252, 0.01) 100%);
+  }
+  
+  .fc-timegrid-col:nth-child(even) {
+    @apply bg-gray-50/20;
+    background: linear-gradient(180deg, rgba(241, 245, 249, 0.05) 0%, rgba(248, 250, 252, 0.02) 100%);
+  }
+  
+  .fc-timegrid-col:hover {
+    @apply bg-blue-500/5;
+    background: linear-gradient(180deg, rgba(14, 165, 233, 0.03) 0%, rgba(240, 249, 255, 0.02) 100%);
+  }
+  
+  /* 시간 축 (왼쪽 시간 레이블들) - 더 넓고 세련되게 */
+  .fc-timegrid-axis {
+    @apply font-medium text-gray-600 text-sm relative;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.7) 100%);
+    backdrop-filter: blur(10px);
+    border-right: 2px solid rgba(226, 232, 240, 0.3) !important;
+    width: 80px !important; /* 시간 축을 더 넓게 */
+    min-width: 80px !important;
+  }
+  
+  .fc-timegrid-axis-chunk {
+    @apply py-3 px-4; /* 시간 라벨 패딩 증가 */
+  }
+  
+  /* 시간 슬롯과 그리드 (vertical) - 더 큰 셀 크기 */
+  .fc-timegrid-body {
+    @apply border-surface-200/20;
+  }
+  
+  .fc-timegrid-slots {
+    @apply border-surface-200/20;
+  }
+  
+  .fc-timegrid-slot {
+    @apply border-gray-200/30 relative;
+    height: 120px !important; /* 시간 슬롯 높이를 훨씬 더 크게 (기본 48px → 120px) */
+    transition: background-color 0.2s ease;
+  }
+  
+  .fc-timegrid-slot:nth-child(even) {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.005) 0%, rgba(248, 250, 252, 0.01) 100%);
+  }
+  
+  .fc-timegrid-slot:hover {
+    @apply bg-primary-50/30;
+  }
+  
+  /* 30분 단위 구분선 */
+  .fc-timegrid-slot:nth-child(odd) {
+    border-bottom: 1px solid rgba(203, 213, 225, 0.2) !important;
+  }
+  
+  .fc-timegrid-slot:nth-child(even) {
+    border-bottom: 1px solid rgba(203, 213, 225, 0.4) !important; /* 1시간 단위는 더 진하게 */
+  }
+  
+  /* 시간 슬롯 라인들 */
+  .fc-timegrid-slot-lane {
+    @apply border-surface-100/50;
+  }
+  
+  /* 전체 일간 영역 */
+  .fc-timegrid-divider {
+    @apply border-surface-300/50;
+  }
+  
+  /* 컬럼 구분선을 더 세련되게 */
+  .fc-timegrid-col + .fc-timegrid-col {
+    border-left: 2px solid rgba(226, 232, 240, 0.2) !important;
+  }
+  
+  /* 업무시간 외 구역 - 기본 블록시간 (점심시간) */
+  .fc-non-business {
+    background-color: rgba(239, 68, 68, 0.08) !important;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 8px,
+      rgba(239, 68, 68, 0.12) 8px,
+      rgba(239, 68, 68, 0.12) 16px
+    ) !important;
+    position: relative;
+    cursor: not-allowed !important;
+  }
+  
+  /* 투자사별 개별 블록시간을 더 명확하게 구분 */
+  
+  /* 투자사 A 블록시간 (파란색 계열) */
+  .fc-timegrid-col[data-resource-id="investor-a"] .fc-non-business {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 4px,
+      rgba(59, 130, 246, 0.2) 4px,
+      rgba(59, 130, 246, 0.2) 8px
+    ) !important;
+    border-left: 4px solid rgba(59, 130, 246, 0.6) !important;
+    position: relative;
+  }
+  
+  .fc-timegrid-col[data-resource-id="investor-a"] .fc-non-business:after {
+    content: '🚀 블록';
+    position: absolute;
+    top: 2px;
+    left: 8px;
+    font-size: 10px;
+    color: rgba(59, 130, 246, 0.8);
+    font-weight: bold;
+    pointer-events: none;
+  }
+  
+  /* 투자사 B 블록시간 (초록색 계열) */
+  .fc-timegrid-col[data-resource-id="investor-b"] .fc-non-business {
+    background-color: rgba(34, 197, 94, 0.1) !important;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 4px,
+      rgba(34, 197, 94, 0.2) 4px,
+      rgba(34, 197, 94, 0.2) 8px
+    ) !important;
+    border-left: 4px solid rgba(34, 197, 94, 0.6) !important;
+    position: relative;
+  }
+  
+  .fc-timegrid-col[data-resource-id="investor-b"] .fc-non-business:after {
+    content: '💰 블록';
+    position: absolute;
+    top: 2px;
+    left: 8px;
+    font-size: 10px;
+    color: rgba(34, 197, 94, 0.8);
+    font-weight: bold;
+    pointer-events: none;
+  }
+  
+  /* 투자사 C 블록시간 (보라색 계열) */
+  .fc-timegrid-col[data-resource-id="investor-c"] .fc-non-business {
+    background-color: rgba(139, 92, 246, 0.1) !important;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 4px,
+      rgba(139, 92, 246, 0.2) 4px,
+      rgba(139, 92, 246, 0.2) 8px
+    ) !important;
+    border-left: 4px solid rgba(139, 92, 246, 0.6) !important;
+    position: relative;
+  }
+  
+  .fc-timegrid-col[data-resource-id="investor-c"] .fc-non-business:after {
+    content: '🏥 블록';
+    position: absolute;
+    top: 2px;
+    left: 8px;
+    font-size: 10px;
+    color: rgba(139, 92, 246, 0.8);
+    font-weight: bold;
+    pointer-events: none;
+  }
+  
+  /* 투자사별 블록시간 호버 효과 */
+  .fc-timegrid-col[data-resource-id] .fc-non-business:hover {
+    transform: scale(1.02);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+  }
+  
+  /* 배경 이벤트 스타일 */
+  .fc-bg-event {
+    opacity: 0.8;
+  }
+  
+  /* 점심시간 배경 이벤트 - 더 강한 블록 느낌 */
+  .lunch-block {
+    background-color: rgba(239, 68, 68, 0.25) !important;
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.3) 0px,
+        rgba(255, 255, 255, 0.3) 4px,
+        rgba(239, 68, 68, 0.4) 4px,
+        rgba(239, 68, 68, 0.4) 8px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(239, 68, 68, 0.2) 2px,
+        rgba(239, 68, 68, 0.2) 4px
+      ) !important;
+    border: 3px solid rgba(239, 68, 68, 0.6) !important;
+    border-radius: 4px !important;
+    cursor: not-allowed !important;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.3) !important;
+  }
+  
+  .lunch-block::before {
+    content: '🚫 점심시간';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(239, 68, 68, 0.8);
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  /* 투자사별 배경 블록 - 더 강한 블록 느낌 */
+  .investor-a-block {
+    background-color: rgba(59, 130, 246, 0.2) !important;
+    background-image: 
+      repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.4) 0px,
+        rgba(255, 255, 255, 0.4) 3px,
+        rgba(59, 130, 246, 0.35) 3px,
+        rgba(59, 130, 246, 0.35) 6px
+      ),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%) !important;
+    border: 2px solid rgba(59, 130, 246, 0.7) !important;
+    border-left: 6px solid rgba(59, 130, 246, 0.8) !important;
+    border-radius: 3px !important;
+    cursor: not-allowed !important;
+    position: relative;
+    box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.25) !important;
+  }
+  
+  .investor-a-block::before {
+    content: '🚀 내부회의/기술검토';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(59, 130, 246, 0.9);
+    font-weight: bold;
+    font-size: 10px;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+  }
+  
+  .investor-b-block {
+    background-color: rgba(34, 197, 94, 0.2) !important;
+    background-image: 
+      repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.4) 0px,
+        rgba(255, 255, 255, 0.4) 3px,
+        rgba(34, 197, 94, 0.35) 3px,
+        rgba(34, 197, 94, 0.35) 6px
+      ),
+      linear-gradient(90deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%) !important;
+    border: 2px solid rgba(34, 197, 94, 0.7) !important;
+    border-left: 6px solid rgba(34, 197, 94, 0.8) !important;
+    border-radius: 3px !important;
+    cursor: not-allowed !important;
+    position: relative;
+    box-shadow: inset 0 0 15px rgba(34, 197, 94, 0.25) !important;
+  }
+  
+  .investor-b-block::before {
+    content: '💰 파트너콜/투자위원회/실사';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(34, 197, 94, 0.9);
+    font-weight: bold;
+    font-size: 10px;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+  }
+  
+  .investor-c-block {
+    background-color: rgba(139, 92, 246, 0.2) !important;
+    background-image: 
+      repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.4) 0px,
+        rgba(255, 255, 255, 0.4) 3px,
+        rgba(139, 92, 246, 0.35) 3px,
+        rgba(139, 92, 246, 0.35) 6px
+      ),
+      linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%) !important;
+    border: 2px solid rgba(139, 92, 246, 0.7) !important;
+    border-left: 6px solid rgba(139, 92, 246, 0.8) !important;
+    border-radius: 3px !important;
+    cursor: not-allowed !important;
+    position: relative;
+    box-shadow: inset 0 0 15px rgba(139, 92, 246, 0.25) !important;
+  }
+  
+  .investor-c-block::before {
+    content: '🏥 의료진상담/규제검토/임상';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(139, 92, 246, 0.9);
+    font-weight: bold;
+    font-size: 10px;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+  }
+  
+  /* 블록 영역 호버 시 경고 효과 강화 */
+  .lunch-block:hover,
+  .investor-a-block:hover,
+  .investor-b-block:hover,
+  .investor-c-block:hover {
+    transform: scale(1.02) !important;
+    filter: brightness(1.1) contrast(1.1) !important;
+    box-shadow: 
+      inset 0 0 25px rgba(255, 0, 0, 0.3),
+      0 0 20px rgba(255, 0, 0, 0.2) !important;
+    animation: block-shake 0.5s ease-in-out !important;
+  }
+  
+  /* 블록 영역 클릭 시 진동 및 경고 효과 */
+  .lunch-block:active,
+  .investor-a-block:active,
+  .investor-b-block:active,
+  .investor-c-block:active {
+    animation: disabled-shake 0.6s ease-in-out !important;
+    transform: scale(0.98) !important;
+  }
+  
+  @keyframes block-shake {
+    0%, 100% { transform: translateX(0) scale(1.02); }
+    25% { transform: translateX(-2px) scale(1.02); }
+    75% { transform: translateX(2px) scale(1.02); }
+  }
+  
+  @keyframes disabled-shake {
+    0%, 100% { 
+      transform: translateX(0) scale(0.98);
+      box-shadow: inset 0 0 30px rgba(255, 0, 0, 0.4), 0 0 25px rgba(255, 0, 0, 0.3);
+    }
+    20% { 
+      transform: translateX(-3px) scale(0.98);
+      box-shadow: inset 0 0 35px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.4);
+    }
+    40% { 
+      transform: translateX(3px) scale(0.98);
+      box-shadow: inset 0 0 35px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.4);
+    }
+    60% { 
+      transform: translateX(-2px) scale(0.98);
+      box-shadow: inset 0 0 35px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.4);
+    }
+    80% { 
+      transform: translateX(2px) scale(0.98);
+      box-shadow: inset 0 0 35px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.4);
+    }
+  }
+  
+  /* 블록 영역에 깜빡임 효과 추가 */
+  .lunch-block,
+  .investor-a-block,
+  .investor-b-block,
+  .investor-c-block {
+    animation: subtle-pulse 3s ease-in-out infinite !important;
+  }
+  
+  @keyframes subtle-pulse {
+    0%, 100% { 
+      opacity: 0.8;
+      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    50% { 
+      opacity: 0.9;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  /* 현재 시간 표시선 (vertical layout) */
+  .fc-timegrid-now-indicator-line {
+    @apply border-secondary-500 border-2;
+  }
+  
+  .fc-timegrid-now-indicator-arrow {
+    @apply border-secondary-500;
+  }
+  
+  /* 선택 효과 */
+  .fc-highlight {
+    @apply bg-primary-500/20 rounded-lg;
+  }
+  
+  /* 드래그 효과 */
+  .fc-event-dragging {
+    @apply opacity-80 scale-105 z-50;
+  }
+  
+  .fc-event-resizing {
+    @apply opacity-90;
+  }
+  
+  /* 스크롤바 스타일링 (vertical layout) */
+  .fc-timegrid-body::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  .fc-timegrid-body::-webkit-scrollbar-track {
+    @apply bg-surface-100 rounded-md;
+  }
+  
+  .fc-timegrid-body::-webkit-scrollbar-thumb {
+    @apply bg-primary-500 rounded-md transition-colors duration-200;
+  }
+  
+  .fc-timegrid-body::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-600;
+  }
+  
+  /* 메인 스크롤 영역에도 적용 */
+  .fc-scroller::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  .fc-scroller::-webkit-scrollbar-track {
+    @apply bg-surface-100 rounded-md;
+  }
+  
+  .fc-scroller::-webkit-scrollbar-thumb {
+    @apply bg-primary-500 rounded-md transition-colors duration-200;
+  }
+  
+  .fc-scroller::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-600;
+  }
+  
+  /* 고급 인터랙션 스타일 */
+  .fc-event.fc-event-selected {
+    @apply ring-4 ring-secondary-400/60 ring-offset-4 ring-offset-white/50;
+    box-shadow: 
+      0 0 30px rgba(217, 70, 239, 0.4),
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: scale(1.08) translateY(-2px);
+  }
+  
+  /* 로딩 상태 - 스켈레톤 효과 */
+  .fc-event.fc-event-loading {
+    background: linear-gradient(
+      90deg,
+      rgba(203, 213, 225, 0.3) 25%,
+      rgba(148, 163, 184, 0.3) 50%,
+      rgba(203, 213, 225, 0.3) 75%
+    ) !important;
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  /* 성공 상태 - 체크마크 효과 */
+  .fc-event.fc-event-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%) !important;
+    position: relative;
+    animation: success-pulse 2s ease-in-out;
+  }
+  
+  .fc-event.fc-event-success::after {
+    content: '✓';
+    @apply absolute top-1 right-1 text-white text-xs font-bold;
+    animation: check-in 0.5s ease-out 0.5s both;
+    transform: scale(0);
+  }
+  
+  @keyframes success-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  }
+  
+  @keyframes check-in {
+    to { transform: scale(1); }
+  }
+  
+  /* 에러 상태 - 경고 효과 */
+  .fc-event.fc-event-error {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%) !important;
+    animation: error-shake 0.5s ease-in-out 3, error-glow 2s infinite;
+  }
+  
+  .fc-event.fc-event-error::after {
+    content: '!';
+    @apply absolute top-1 right-1 text-white text-xs font-bold;
+  }
+  
+  @keyframes error-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+  }
+  
+  @keyframes error-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  }
+  
+  /* 업데이트된 이벤트 - 황금 글로우 효과 */
+  .fc-event.fc-event-updated {
+    position: relative;
+    animation: golden-glow 3s ease-in-out;
+  }
+  
+  .fc-event.fc-event-updated::before {
+    @apply content-[''] absolute -inset-1 rounded-xl opacity-0;
+    background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+    animation: golden-border 2s ease-in-out;
+    z-index: -1;
+  }
+  
+  @keyframes golden-glow {
+    0%, 100% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12); }
+    50% { 
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 0 20px rgba(245, 158, 11, 0.5),
+        0 0 40px rgba(245, 158, 11, 0.2);
+    }
+  }
+  
+  @keyframes golden-border {
+    0% { opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0; }
+  }
+  
+  /* 오늘 날짜 하이라이트 (vertical layout) */
+  .fc-timegrid-col.fc-day-today {
+    @apply bg-primary-50/50 border-primary-200;
+  }
+  
+  /* 현재 시간 주변 하이라이트 */
+  .fc-timegrid-slot.fc-slot-current-time {
+    @apply bg-secondary-50/30;
+  }
+  
+  /* 드래그 오버 효과 */
+  .fc-timegrid-slot.fc-drop-hover {
+    @apply bg-primary-100/60 border-primary-300 transition-colors duration-150;
+  }
+  
+  /* 더 부드러운 그리드 라인 (vertical) */
+  .fc-timegrid-slots table {
+    @apply divide-y divide-surface-100;
+  }
+  
+  .fc-timegrid-slots td {
+    @apply border-r border-surface-100/50;
+  }
+  
+  /* 시간 레이블 스타일 개선 (vertical) */
+  .fc-timegrid-axis-chunk {
+    @apply text-surface-600 font-medium;
+  }
+  
+  .fc-timegrid-axis:hover {
+    @apply text-primary-600 bg-primary-50/30;
+  }
+  
+  /* 리소스별 컬럼 구분선 */
+  .fc-timegrid-col + .fc-timegrid-col {
+    @apply border-l-2 border-surface-200;
+  }
+  
+  /* All-day 이벤트 영역 완전 숨김 */
+  .fc-timegrid-allday {
+    @apply hidden;
+  }
+  
+  .fc-timegrid-body {
+    border-top: none !important;
+  }
+  
+  /* 마이크로 인터랙션 - 로딩 상태들 */
+  .fc-loading {
+    position: relative;
+  }
+  
+  .fc-loading::before {
+    @apply content-[''] absolute inset-0 bg-white/70 backdrop-blur-sm rounded-2xl z-50;
+  }
+  
+  .fc-loading::after {
+    @apply content-[''] absolute top-1/2 left-1/2 w-8 h-8 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin z-50;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* 선택 리플 효과 */
+  .fc-timegrid-slot {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .fc-timegrid-slot::before {
+    @apply content-[''] absolute inset-0 bg-primary-400/20 rounded-full opacity-0 pointer-events-none;
+    transform: scale(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .fc-timegrid-slot:active::before {
+    @apply opacity-100;
+    transform: scale(1);
+  }
+  
+  /* 부드러운 포커스 효과 */
+  .fc-event:focus-visible {
+    @apply outline-none;
+    box-shadow: 
+      0 0 0 3px rgba(14, 165, 233, 0.3),
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  /* 호버 시 타임라인 하이라이트 */
+  .fc-timegrid-col:hover .fc-timegrid-slot {
+    background: linear-gradient(90deg, rgba(14, 165, 233, 0.02) 0%, rgba(240, 249, 255, 0.05) 100%);
+  }
+  
+  /* 컬럼 헤더 활성 상태 */
+  .fc-col-header-cell:active {
+    @apply scale-95;
+    transform-origin: center;
+  }
+  
+  /* 스무스 스크롤 향상 */
+  .fc-scroller {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+  }
+  
+  /* 이벤트 드래그 시 그림자 트레일 효과 */
+  .fc-event.fc-event-dragging {
+    @apply opacity-90 scale-110 rotate-1;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    z-index: 1000 !important;
+  }
+  
+  .fc-event.fc-event-dragging::after {
+    @apply content-[''] absolute -inset-2 bg-primary-400/20 rounded-xl opacity-60 animate-ping;
+    z-index: -1;
+  }
 }
 
-.navbar > * {
-  padding: .5em;
+@layer utilities {
+  /* 반응형 유틸리티 */
+  @media (max-width: 768px) {
+    .calendar-container {
+      @apply px-4 max-w-full;
+    }
+    
+    .fc-header-toolbar {
+      @apply px-4 py-4 flex-col gap-4;
+    }
+    
+    .fc-toolbar-title {
+      @apply text-xl text-center;
+    }
+    
+    .fc-button-group {
+      @apply flex justify-center;
+    }
+    
+    .fc-button {
+      @apply px-3 py-1.5 text-sm;
+    }
+    
+    .fc-col-header-cell {
+      @apply py-2 px-1 text-xs;
+    }
+    
+    .fc-timegrid-axis {
+      @apply text-[0.625rem] py-1;
+    }
+    
+    .fc-event {
+      @apply text-xs;
+    }
+    
+    .fc-timegrid-header th {
+      @apply text-[0.625rem] px-1 py-2;
+    }
+    
+    /* 모바일에서 리소스 컬럼 최소 너비 */
+    .fc-timegrid-col {
+      @apply min-w-20;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .fc-header-toolbar {
+      @apply px-3 py-3;
+    }
+    
+    .fc-toolbar-title {
+      @apply text-lg;
+    }
+    
+    .fc-button {
+      @apply px-2 py-1 text-xs;
+    }
+    
+    .fc-col-header-cell {
+      @apply py-1 px-0.5 text-[0.625rem];
+    }
+    
+    .fc-timegrid-axis {
+      @apply text-[0.5rem] py-0.5;
+    }
+    
+    .fc-event {
+      @apply text-[0.625rem];
+    }
+    
+    /* 매우 작은 화면에서 리소스 컬럼 최소 너비 */
+    .fc-timegrid-col {
+      @apply min-w-16;
+    }
+  }
+  
+  /* 접근성 */
+  .fc-button:focus {
+    @apply outline-2 outline-primary-500 outline-offset-2;
+  }
+  
+  .fc-event:focus {
+    @apply outline-2 outline-secondary-500 outline-offset-1;
+  }
+  
+  /* 다크모드 지원 */
+  @media (prefers-color-scheme: dark) {
+    html {
+      @apply bg-surface-900;
+    }
+    
+    .fc {
+      @apply bg-surface-800;
+    }
+    
+    .fc-timegrid-header {
+      @apply bg-surface-800;
+    }
+    
+    .fc-timegrid-header th {
+      @apply bg-gradient-to-b from-surface-800 to-surface-700 text-surface-400;
+    }
+    
+    .fc-col-header-cell {
+      @apply bg-gradient-to-b from-surface-800 to-surface-700 text-surface-300;
+    }
+    
+    .fc-timegrid-col:nth-child(even) {
+      @apply bg-surface-900;
+    }
+    
+    .fc-timegrid-slot:nth-child(even) {
+      @apply bg-white/[0.02];
+    }
+    
+    .fc-timegrid-axis {
+      @apply bg-gradient-to-r from-surface-800 to-surface-700 text-surface-400;
+    }
+  }
 }
 
-.calendar-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+/* 프린트 스타일 */
+@media print {
+  .fc-header-toolbar {
+    @apply bg-none text-black;
+  }
+  
+  .fc-button {
+    @apply hidden;
+  }
+  
+  .fc-event {
+    @apply shadow-none bg-surface-200 text-black;
+  }
+  
+  .fc {
+    @apply shadow-none;
+  }
 }
